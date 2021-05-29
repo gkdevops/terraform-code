@@ -1,13 +1,12 @@
 provider "aws" {
-  version = "3.4.0"
   profile = "default"
   region  = "us-east-1"
 }
 
 terraform {
   backend "s3" {
-    bucket = "intellipaat-s3-bucket-demo"
-    key    = "development/demo/terraform.tfstate"
+    bucket = "terraform-remote-state-intellipaat"
+    key    = "staging/demo-1/terraform.tfstate"
     region = "us-east-1"
   }
 }

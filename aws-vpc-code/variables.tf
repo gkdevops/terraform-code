@@ -1,6 +1,10 @@
+variable "tag_name" {
+  description = "The tag name to be associated to aws resources we create"
+}
+
 variable "aws_region" {
   description = "The AWS region to create things in."
-	default     = "us-east-1"
+  default     = "us-east-1"
 }
 
 variable "vpc_cidr" {
@@ -17,6 +21,6 @@ variable "private_cidrs" {
 
 variable "ingress_ports" {
   type        = list(number)
-	description = "list of ingress ports"
-	default     = [8080, 22]
+  description = "list of ingress ports"
+  default     = [8080, 22]
 }

@@ -8,7 +8,7 @@ terraform {
 # Provider config is specific to each cloud.
 provider "aws" {
   profile = "default"
-  region     = var.aws_region
+  region  = var.aws_region
 }
 
 # Query all avilable Availibility Zone.
@@ -142,20 +142,20 @@ resource "aws_security_group_rule" "all_outbound_access" {
 }
 
 resource "aws_security_group" "sg_private" {
-	  name        = "my_test_sg_private"
-    description = "Ingress for Vault"
-	  vpc_id      = aws_vpc.main.id
+  name        = "my_test_sg_private"
+  description = "Ingress for Vault"
+  vpc_id      = aws_vpc.main.id
 
-		dynamic "ingress" {
-		  iterator = port
-		  for_each = var.ingress_ports
-		  content {
-			  from_port   = port.value
-				to_port     = port.value
-				protocol    = "tcp"
-				cidr_blocks = ["0.0.0.0/0"]
-			}
-		}
+  dynamic "ingress" {
+    iterator = port
+    for_each = var.ingress_ports
+    content {
+      from_port   = port.value
+      to_port     = port.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
 }
 
 resource "aws_eip" "my-test-eip" {

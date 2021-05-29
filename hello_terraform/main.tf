@@ -1,16 +1,21 @@
+# This is my first terraform code
+
+/* This
+is a 
+multi line comment */
+
 provider "aws" {
-  version    = "3.4.0"
   region     = "us-east-1"
-  access_key = "AKIAJAPEC2Z3LMPOQ2PQ"
-  secret_key = "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"
+  access_key = "AKIA4ESCETGQ7QCG3XHW"
+  secret_key = "nDVXYNTO0EjABBE2WYOSmmwObyvvSo48a/xwg1xd"
 }
 
 resource "aws_instance" "example" {
-  ami = "ami-098f16afa9edf40be"
-	instance_type = "t2.micro"
-	key_name      = "aws"
+  ami           = "ami-0b0af3577fe5e3532"
+  instance_type = "t2.micro"
+  key_name      = "aws"
 
-	tags = {
-	  Name = "Terraform Created"
-	}
+  tags = {
+    Name = "Created by Terraform"
+  }
 }
