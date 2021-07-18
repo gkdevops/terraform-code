@@ -1,10 +1,24 @@
-# Optional configuration for the Terraform Engine.
 terraform {
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.46.0"
+    }
+  }
+
   required_version = ">= 0.12"
+
+  backend "s3" {
+    bucket = "terraform-remote-state-intellipaat"
+    key    = "dev/infra/terraform.tfstate"
+    region = "us-east-1"
+    profile = "default"
+  }
+
 }
 
-# Provider
-# To Implement cloud specific API.
+# Provider To Implement cloud specific API.
 # Provider config is specific to each cloud.
 provider "aws" {
   profile = "default"
