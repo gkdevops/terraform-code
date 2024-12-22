@@ -1,22 +1,30 @@
 terraform {
+
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.82.2"
+    }
+  }
+
   backend "s3" {
-    bucket = "terraform-remote-state-intellipaat"
-    key    = "dev/network/terraform.tfstate"
+    bucket = "terraform-remote-state-prepzee"
+    key    = "dev/networking/terraform.tfstate"
     region = "us-east-1"
-    profile = "default"
+    profile = "development"
   }
 
 }
 
 # Configure the AWS Provider
 provider "aws" {
-  profile = "default"
+  profile = "development"
   region  = "us-east-1"
 }
 
 # define a variable
 variable "vpc_cidr" {
-  default = "10.0.0.0/16"
+  default = "10.1.0.0/16"
 }
 
 # create a aws resource
@@ -30,9 +38,13 @@ resource "aws_vpc" "main" {
 }
 
 # Query all avilable Availibility Zone.
-data "aws_availability_zones" "available" {}
+data "aws_availability_zones" "listofzones" {}
 
 # Print the value of the variables
 output "aws_availability_zones" {
-  value = data.aws_availability_zones.available
+  value = data.aws_availability_zones.listofzones
+}
+
+output "vpc_id" {
+  value = aws_vpc.main.id
 }
