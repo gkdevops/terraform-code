@@ -3,26 +3,23 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.46.0"
+      version = "5.82.2"
     }
   }
 
-  required_version = ">= 0.12"
-
   backend "s3" {
-    bucket = "terraform-remote-state-intellipaat"
-    key    = "dev/infra/terraform.tfstate"
-    region = "us-east-1"
-    profile = "default"
+    bucket  = "terraform-remote-state-prepzee"
+    key     = "dev/networking/terraform.tfstate"
+    region  = "us-east-1"
+    profile = "development"
   }
 
 }
 
-# Provider To Implement cloud specific API.
-# Provider config is specific to each cloud.
+# Configure the AWS Provider
 provider "aws" {
-  profile = "default"
-  region  = var.aws_region
+  profile = "development"
+  region  = "us-east-1"
 }
 
 # Query all avilable Availibility Zone.
@@ -42,7 +39,7 @@ resource "aws_vpc" "main" {
 # Creating Internet Gateway
 
 resource "aws_internet_gateway" "gw" {
-  vpc_id = aws_vpc.main.id
+  vpc_id   = aws_vpc.main.id
 
   tags = {
     Name = "my-test-igw"
@@ -52,6 +49,7 @@ resource "aws_internet_gateway" "gw" {
 # Public Route Table
 
 resource "aws_route_table" "public_route" {
+  #count  = var.create_rtb ? 1 : 0
   vpc_id = aws_vpc.main.id
 
   route {

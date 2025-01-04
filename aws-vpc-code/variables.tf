@@ -19,6 +19,12 @@ variable "private_cidrs" {
   default = ["10.0.3.0/24", "10.0.4.0/24"]
 }
 
+variable "create_rtb" {
+  description = "Whether to create the public route table or not"
+  type        = bool
+  default     = true
+}
+
 variable "ingress_ports" {
   type        = list(number)
   description = "list of ingress ports"
