@@ -65,6 +65,7 @@ resource "aws_route_table" "public_route" {
 # Private Route Table
 
 resource "aws_default_route_table" "private_route" {
+  count = 1
   default_route_table_id = aws_vpc.main.default_route_table_id
 
   route {
