@@ -22,7 +22,7 @@ output "aws_availability_zones" {
 }
 
 output "public_security_group" {
-  value = aws_security_group.test_sg.id
+  value = aws_security_group.sg_public.id
 }
 
 output "private_security_group" {

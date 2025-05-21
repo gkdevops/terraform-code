@@ -1,22 +1,21 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "5.82.2"
     }
   }
   backend "s3" {
-    bucket = "valaxy-terraform-state"
-    key    = "dev/sales/terraform.tfstate"
-    region = "us-east-1"
-    profile = "development"
+    bucket  = "valaxy-terraform-state"
+    key     = "dev/sales/terraform.tfstate"
+    region  = "us-east-1"
+    profile = "default"
   }
-
 }
 
 # Configure the AWS Provider
 provider "aws" {
-  profile = "development"
+  profile = "default"
   region  = "us-east-1"
 }
 

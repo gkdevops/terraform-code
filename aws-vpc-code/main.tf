@@ -8,7 +8,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket  = "terraform-remote-state-prepzee"
+    bucket  = "valaxy-terraform-state"
     key     = "dev/networking/terraform.tfstate"
     region  = "us-east-1"
     profile = "development"
@@ -114,7 +114,8 @@ resource "aws_route_table_association" "public_subnet_assoc" {
 # Associate Private Subnet with Private Route Table
 resource "aws_route_table_association" "private_subnet_assoc" {
   count          = 2
-  route_table_id = aws_default_route_table.private_route.id
+  # Because aws_default_route_table.private_route has "count" set, its attributes must be accessed on specific instances.
+  route_table_id = aws_default_route_table.private_route.0.id 
   subnet_id      = aws_subnet.private_subnet.*.id[count.index]
   depends_on     = [aws_default_route_table.private_route, aws_subnet.private_subnet]
 }
@@ -172,7 +173,7 @@ resource "aws_security_group" "sg_private" {
 }
 
 resource "aws_eip" "my-test-eip" {
-  vpc = true
+  domain = "vpc"
 }
 
 resource "aws_nat_gateway" "my-test-nat-gateway" {
