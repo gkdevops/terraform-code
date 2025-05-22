@@ -32,9 +32,13 @@ variable "force_destroy" {
 
 variable "enable_versioning" {
   description = "Enable versioning for the S3 bucket"
-  type        = string
+  type        = bool
   default     = false
 
+  validation {
+    condition     = var.enable_versioning == true || var.enable_versioning == false
+    error_message = "enable_versioning must be a boolean value (true or false)."
+  }
 }
 
 variable "tags" {
