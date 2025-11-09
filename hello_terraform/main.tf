@@ -1,8 +1,9 @@
 terraform {
+  required_version = ">= 1.13.5"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.46.0"
+      version = ">= 6.20"
     }
   }
 }
@@ -14,8 +15,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "foo" {
-  ami           = "ami-0b0af3577fe5e3532"
+  ami           = "ami-0157af9aea2eef346"
   instance_type = "t2.micro"
   key_name = "aws"
-  security_groups = ["default", "sg-026bfa6a295451cf2"]
 }
