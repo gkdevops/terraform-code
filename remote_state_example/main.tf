@@ -1,15 +1,17 @@
 terraform {
+  required_version = ">= 1.13"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.82.2"
+      version = ">= 5.82.2"
     }
   }
   backend "s3" {
-    bucket  = "valaxy-terraform-state"
+    bucket  = "valaxy-tf-state-demo"
     key     = "dev/sales/terraform.tfstate"
     region  = "us-east-1"
     profile = "default"
+    use_lockfile = true
   }
 }
 
@@ -42,7 +44,7 @@ resource "aws_vpc" "main" {
 data "aws_availability_zones" "listofzones" {}
 
 data "aws_s3_bucket" "mybucket" {
-  bucket = "valaxy-terraform-state"
+  bucket = "valaxy-tf-state-demo"
 }
 
 # Print the value of the variables
