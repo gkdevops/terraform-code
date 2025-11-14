@@ -8,17 +8,6 @@ variable "bucket_name" {
   }
 }
 
-variable "acl" {
-  description = "The ACL (Access Control List) for the bucket"
-  type        = string
-  default     = "private"
-
-  validation {
-    condition     = contains(["private", "public-read", "public-read-write", "authenticated-read"], var.acl)
-    error_message = "The acl must be one of: private, public-read, public-read-write, or authenticated-read."
-  }
-}
-
 variable "force_destroy" {
   description = "Whether to forcefully destroy the bucket even if it contains objects"
   type        = bool
