@@ -21,13 +21,7 @@ variable "acl" {
 
 variable "force_destroy" {
   description = "Whether to forcefully destroy the bucket even if it contains objects"
-  type        = bool
   default     = false
-
-  validation {
-    condition     = var.force_destroy == true || var.force_destroy == false
-    error_message = "force_destroy must be a boolean value (true or false)."
-  }
 }
 
 variable "enable_versioning" {
